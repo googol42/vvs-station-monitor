@@ -27,12 +27,28 @@
   width: 100%;
 }
 </style>
+<script>
+function onload() {
+    setTimeout(function() { onload(); }, 120 * 1000);
+    var flatastic = document.createElement('object');
+    flatastic.classList.add('two');
+    flatastic.type = "text/html";
+    flatastic.data = "https://flatastic-app.com/webapp/";
+    var flatasticDiv = document.getElementById('flatastic-div');
+    flatasticDiv.appendChild(flatastic);
+    while (flatasticDiv.firstChild !== flatasticDiv.lastChild) {
+        flatasticDiv.removeChild(flatasticDiv.firstChild);
+    }
+
+}
+</script>
 </head>
-<body>
+<body onload="onload()">
 <div class="wrapper">
 <object class="one" type="text/html" data="vvs.html">
 </object>
-<object class="two" type="text/html" data="http://flatastic-app.com/webapp/">
+<div id="flatastic-div" class="two">
+</div>
 </object>
 <iframe class="three" src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d42081.78449387222!2d9.120622676646512!3d48.76066639504889!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e6!4m5!1s0x4799dc8b796ddf6d%3A0x51ffd3c8d0ba000!2sKaltental%2C+Stuttgart!3m2!1d48.7439901!2d9.128565499999999!4m5!1s0x4799db35938379e7%3A0xe361d95cad67428e!2stabakstube!3m2!1d48.777544999999996!2d9.178186!5e0!3m2!1sde!2sde!4v1517071420727" allowfullscreen></iframe>
 </div>
