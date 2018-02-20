@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>VVS Station Monitor</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <style>
+    .station {
+        margin-bottom: 15px;
+    }
+    .stationName {
+        background-color: #FF6600;
+        border-radius: 25px;
+        padding-left: 9px; <!-- prevent text floating out of the colored area -->
+        padding-right: 9px; <!-- prevent text floating out of the colored area -->
+        font-size: x-large;
+        margin-bottom: 5px;
+    }
+    .connection {
+        margin-left: 18px;
+    }
+    .delay {
+
+    }
+    .delayGreen {
+        color: #006400;
+    }
+    .delayOrange {
+        color: #FFA500;
+        font-weight: bold;
+    }
+    .delayRed {
+        color: #DC143C;
+        font-weight: bold;
+    }
+    </style>
+    <script>
+        /* Engelboldstraße 5000008 */
+        /* Kaltental 5006009 */
+        /* Im Elsental 5002578 */
+        /* Österfeld */
+        function init() {
+            var stations = [
+                        ['5000008', ['Vaihingen']],
+                        ['5006009', ['Mineralbäder', 'Fellbach', 'Fellbach Lutherkirche']],
+                        ['5002578', ['Rohr Mitte']],
+                        ['5006027', ['']]
+            ];
+
+            for (var index = 0; index < stations.length; index++) {
+              var stationDiv = document.createElement('div');
+              stationDiv.id = stations[index][0];
+              stationDiv.classList.add('station');
+              var stationNameDiv = document.createElement('div');
+              stationNameDiv.classList.add('stationName');
+              stationNameDiv.id = "stationName" + stations[index][0];
+              stationDiv.appendChild(stationNameDiv);
+              var connectionsDiv = document.createElement('div');
+              connectionsDiv.id = "connections" + stations[index][0];
+              connectionsDiv.classList.add('connections');
+              stationDiv.appendChild(connectionsDiv);
+              document.body.appendChild(stationDiv);
+              updateStation(stations[index][0], stations[index][1]);
+            }
+        }
+
+        function updateStation(stationId, directions) {
+            setTimeout(function() {updateStation(stationId, directions);}, 60 * 1000);
+            var vvsRequest = new XMLHttpRequest();
+            vvsRequest.open("GET", "https://efa-api.asw.io/api/v1/station/" + stationId + "/departures/", true);
+            vvsRequest.setRequestHeader("Content-type","application/json");
+            vvsRequest.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    addConnections(stationId, directions, this.responseText);
+                }
+            }
+            vvsRequest.send();
+        }
+
+        function addConnections(stationId, directions, connections) {
+            var stationDiv = document.getElementById("stationName" + stationId);
+            var connectionsDiv = document.getElementById('connections' + stationId);
+            while (connectionsDiv.firstChild) {
+                connectionsDiv.removeChild(connectionsDiv.firstChild);
+            }
+            var numberOfStationsAdded = 0;
+            for (var i = 0; i < 10000; i++) {
+                var connection = JSON.parse(connections)[i];
+                stationDiv.innerText = connection['stopName'];
+                if (!arrayContains(connection['direction'], directions) ) {
+                    console.log('Connection excluded', connection['direction'], directions);
+                    continue;
+                }
+                var connectionDiv = document.createElement('div');
+                connectionDiv.classList.add('connection');
+
+                connectionDiv.appendChild(getTime(connection));
+                connectionDiv.appendChild(getDelay(connection));
+                connectionDiv.appendChild(addDirection(connection));
+                connectionsDiv.appendChild(connectionDiv);
+                numberOfStationsAdded++;
+                if (numberOfStationsAdded === 3) {
+                    break;
+                }
+            }
+        }
+
+
+        function getTime(connection) {
+            var connectionP = document.createElement("span");
+            var hour = connection['departureTime']['hour'];
+            if (hour < 10) {
+                hour = "0" + hour;
+            }
+            var minutes = connection['departureTime']['minute'];
+            if (minutes < 10) {
+                minutes = "0" + minutes;
+            }
+            connectionP.innerText = hour + ":" + minutes;
+            return connectionP;
+        }
+
+        function getDelay(connection) {
+            var delaySpan = document.createElement("span");
+            var delay = connection['delay'];
+            delaySpan.innerText = " (+" + delay + ")";
+            if (5 < delay) {
+                delaySpan.classList.add('delayRed');
+            } else if (1 < delay) {
+                delaySpan.classList.add('delayOrange');
+            } else {
+                delaySpan.innerText = '';
+            }
+            return delaySpan;
+        }
+
+        function addDirection(connection) {
+            var root = document.createElement("span");
+            var arrowP = document.createElement("span");
+            var image = document.createElement('img');
+            var directionP  = document.createElement("span");
+            root.appendChild(arrowP);
+            root.appendChild(image);
+            root.appendChild(directionP);
+
+            var number_ = connection['number'];
+            if (number_.startsWith('S')) {
+                image.src = 'http://www.vvs.de/typo3conf/ext/vvs_efa_monitor/Resources/Public/Images/icon.sbahn.20.png';
+            } else if (number_.startsWith('U')) {
+                image.src = 'http://www.vvs.de/typo3conf/ext/vvs_efa_monitor/Resources/Public/Images/icon.ubahn.20.png'
+            } else {
+                image.src = 'http://www.vvs.de/typo3conf/ext/vvs_efa_monitor/Resources/Public/Images/icon.bus.20.png';
+            }
+            arrowP.innerText = " → ";
+            directionP.innerText = " " + number_ + ": " + connection['direction'];
+            return root;
+        }
+
+        function arrayContains(needle, arraystack) {
+            if (arraystack.indexOf('') != -1) {
+                return true;
+            }
+            return (arraystack.indexOf(needle) > -1);
+        }
+    </script>
+</head>
+<body onload="init()">
+</body>
+</html>
