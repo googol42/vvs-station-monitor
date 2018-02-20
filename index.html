@@ -52,8 +52,9 @@
 </style>
 <script>
 function onload() {
-console.log('ontouchstart' in document.documentElement);
-    initFadeTimeout();
+    if ('ontouchstart' in document.documentElement) {
+        initFadeTimeout();
+    }
     reloadFlatastic();
 }
 function fadeOut() {
