@@ -144,11 +144,11 @@
 
             var number_ = connection['number'];
             if (number_.startsWith('S')) {
-                image.src = 'http://www.vvs.de/typo3conf/ext/vvs_efa_monitor/Resources/Public/Images/icon.sbahn.20.png';
+                image.src = 'https://www.vvs.de/typo3conf/ext/vvs_efa_monitor/Resources/Public/Images/icon.sbahn.20.png';
             } else if (number_.startsWith('U')) {
-                image.src = 'http://www.vvs.de/typo3conf/ext/vvs_efa_monitor/Resources/Public/Images/icon.ubahn.20.png'
+                image.src = 'https://www.vvs.de/typo3conf/ext/vvs_efa_monitor/Resources/Public/Images/icon.ubahn.20.png'
             } else {
-                image.src = 'http://www.vvs.de/typo3conf/ext/vvs_efa_monitor/Resources/Public/Images/icon.bus.20.png';
+                image.src = 'https://www.vvs.de/typo3conf/ext/vvs_efa_monitor/Resources/Public/Images/icon.bus.20.png';
             }
             arrowP.innerText = " → ";
             directionP.innerText = " " + number_ + ": " + connection['direction'];
