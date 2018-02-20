@@ -34,6 +34,10 @@
 </style>
 <script>
 function onload() {
+    reloadFlatastic();
+}
+
+function reloadFlatastic() {
     setTimeout(function() { onload(); }, 120 * 1000);
     var flatastic = document.createElement('object');
     flatastic.classList.add('two');
