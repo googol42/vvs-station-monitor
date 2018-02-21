@@ -78,7 +78,7 @@ function initFadeTimeout() {
 }
 
 function reloadFlatastic() {
-    setTimeout(function() { onload(); }, 2 * 60 * 1000);
+    setTimeout(function() { reloadFlatastic(); }, 2 * 60 * 1000);
     var flatastic = document.createElement('object');
     flatastic.classList.add('two');
     flatastic.type = "text/html";
