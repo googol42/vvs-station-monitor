@@ -18,6 +18,10 @@
     .connection {
         margin-left: 18px;
     }
+    .time-span {
+        width: 90px;
+        display: inline-block;
+    }
     .delay {
 
     }
@@ -102,8 +106,11 @@
                 var connectionDiv = document.createElement('div');
                 connectionDiv.classList.add('connection');
 
-                connectionDiv.appendChild(getTime(connection));
-                connectionDiv.appendChild(getDelay(connection));
+                var timeSpan = document.createElement("span");
+                timeSpan.classList.add('time-span');
+                connectionDiv.appendChild(timeSpan);
+                timeSpan.appendChild(getTime(connection));
+                timeSpan.appendChild(getDelay(connection));
                 connectionDiv.appendChild(addDirection(connection));
                 connectionsDiv.appendChild(connectionDiv);
                 numberOfStationsAdded++;
@@ -131,7 +138,7 @@
         function getDelay(connection) {
             var delaySpan = document.createElement("span");
             var delay = connection['delay'];
-            delaySpan.innerText = " (+" + delay + ")";
+            delaySpan.innerText = " +" + delay;
             if (5 < delay) {
                 delaySpan.classList.add('delayRed');
             } else if (1 < delay) {
