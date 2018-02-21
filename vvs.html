@@ -40,10 +40,10 @@
         /* Österfeld */
         function init() {
             var stations = [
-                        ['5000008', ['Vaihingen']],
-                        ['5006009', ['Mineralbäder', 'Fellbach', 'Fellbach Lutherkirche']],
-                        ['5002578', ['Rohr Mitte', 'Leinfelden']],
-                        ['5006027', ['']]
+                        ['5000008', ['Vaihingen', 'Vaihingen Bf'], ['']],
+                        ['5006009', ['Mineralbäder', 'Fellbach', 'Fellbach Lutherkirche'], ['Heslach', 'Vaihingen', 'Vaihingen Bf', '- Betriebsfahrt -']],
+                        ['5002578', ['Rohr Mitte', 'Leinfelden'], ['']],
+                        ['5006027', [''], ['']]
             ];
 
             for (var index = 0; index < stations.length; index++) {
@@ -59,24 +59,24 @@
               connectionsDiv.classList.add('connections');
               stationDiv.appendChild(connectionsDiv);
               document.body.appendChild(stationDiv);
-              updateStation(stations[index][0], stations[index][1]);
+              updateStation(stations[index][0], stations[index][1], stations[index][2]);
             }
         }
 
-        function updateStation(stationId, directions) {
-            setTimeout(function() {updateStation(stationId, directions);}, 60 * 1000);
+        function updateStation(stationId, directions, ignoreDirections) {
+            setTimeout(function() {updateStation(stationId, directions, ignoreDirections);}, 60 * 1000);
             var vvsRequest = new XMLHttpRequest();
             vvsRequest.open("GET", "https://efa-api.asw.io/api/v1/station/" + stationId + "/departures/", true);
             vvsRequest.setRequestHeader("Content-type","application/json");
             vvsRequest.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
-                    addConnections(stationId, directions, this.responseText);
+                    addConnections(stationId, directions, ignoreDirections, this.responseText);
                 }
             }
             vvsRequest.send();
         }
 
-        function addConnections(stationId, directions, connections) {
+        function addConnections(stationId, directions, ignoreDirections, connections) {
             var stationDiv = document.getElementById("stationName" + stationId);
             var connectionsDiv = document.getElementById('connections' + stationId);
             while (connectionsDiv.firstChild) {
@@ -87,7 +87,16 @@
                 var connection = JSON.parse(connections)[i];
                 stationDiv.innerText = connection['stopName'];
                 if (!arrayContains(connection['direction'], directions) ) {
-                    console.log('Connection excluded', connection['direction'], directions);
+                    if (!arrayContains(connection['direction'], ignoreDirections)) {
+                        console.log('Connection excluded', connection['direction'], directions);
+                        var debugging = document.getElementById('debugging');
+                        debugging.innerText = "Folgende Verbindungen wurden nicht berücksichtigt (Fehler!):";
+                        var debuggingUl = document.getElementById('debuggingUl');
+                        console.log(debuggingUl);
+                        var p = document.createElement("li");
+                        p.innerText = "Von " + connection['stopName'] + " nach " + connection['direction'] + ". Erlaubte Ziele: " + directions;
+                        debuggingUl.appendChild(p);
+                    }
                     continue;
                 }
                 var connectionDiv = document.createElement('div');
@@ -164,5 +173,9 @@
     </script>
 </head>
 <body onload="init()">
+<div>
+    <div id="debugging"></div>
+    <ul id="debuggingUl"></ul>
+</div>
 </body>
 </html>
