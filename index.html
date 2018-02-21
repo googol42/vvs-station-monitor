@@ -22,20 +22,20 @@
   display: grid;
   grid-template-columns: auto auto;
   grid-template-rows: auto auto;
-  height: 95%;
+  height: 100%;
   width: 100%;
 }
 .one {
   grid-column: 1;
   grid-row: 1;
   height: 100%;
-  width: 60%;
+  width: 95%;
 }
 .two {
   grid-column: 2;
-  grid-row: 1 / 3;
+  grid-row: 1;
   height: 100%;
-  width: 100%;
+  width: 95%;
 }
 .three {
   grid-column: 1;
@@ -55,7 +55,7 @@ function onload() {
     if ('ontouchstart' in document.documentElement) {
         initFadeTimeout();
     }
-    //reloadFlatastic();
+    reloadFlatastic();
 }
 function fadeOut() {
     document.getElementById('black-div').classList.remove('fade-in');
@@ -94,15 +94,12 @@ function reloadFlatastic() {
 <body onload="onload()">
 <div id="black-div" class="fade-in"></div>
 <div class="wrapper">
-<object class="one" type="text/html" data="vvs.html">
-</object>
-<!--
-<div id="flatastic-div" class="two">
-</div>
-</object>
-<iframe class="three" src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d42081.78449387222!2d9.120622676646512!3d48.76066639504889!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e6!4m5!1s0x4799dc8b796ddf6d%3A0x51ffd3c8d0ba000!2sKaltental%2C+Stuttgart!3m2!1d48.7439901!2d9.128565499999999!4m5!1s0x4799db35938379e7%3A0xe361d95cad67428e!2stabakstube!3m2!1d48.777544999999996!2d9.178186!5e0!3m2!1sde!2sde!4v1517071420727" allowfullscreen></iframe>
-</div>
+    <object class="one" type="text/html" data="vvs.html"></object>
+    <div id="flatastic-div" class="two"></div>
+    <!--
+    <iframe class="three" src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d42081.78449387222!2d9.120622676646512!3d48.76066639504889!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e6!4m5!1s0x4799dc8b796ddf6d%3A0x51ffd3c8d0ba000!2sKaltental%2C+Stuttgart!3m2!1d48.7439901!2d9.128565499999999!4m5!1s0x4799db35938379e7%3A0xe361d95cad67428e!2stabakstube!3m2!1d48.777544999999996!2d9.178186!5e0!3m2!1sde!2sde!4v1517071420727" allowfullscreen></iframe>
 -->
+</div>
 <div class="copyright">(c) googol42 - Licensed under <a href="http://www.gnu.org/licenses/agpl-3.0.en.html">AGPL</a> Version 3 or any later Version - <a href="https://github.com/googol42/vvs-station-monitor/archive/gh-pages.zip">Source</a> - Proudly made using Linux, git and vim.</p>
 </body>
 </html>
