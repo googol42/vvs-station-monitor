@@ -32,6 +32,12 @@
               document.getElementById('stations').appendChild(stationDiv);
               updateStation(stations[index][0], stations[index][1], stations[index][2]);
             }
+            updateClock();
+        }
+
+        function updateClock() {
+            setTimeout(function() {updateClock();}, 1 * 1000);
+            document.getElementById('clock').innerText = new Date().toLocaleTimeString();
         }
 
         function updateStation(stationId, directions, ignoreDirections) {
@@ -147,7 +153,8 @@
     </script>
 </head>
 <body onload="init()">
-<div id="stations"></div>
+<div id="clock" class="clock"></div>
+<div id="stations" class="stations"></div>
 <div>
     <div id="debugging"></div>
     <ul id="debuggingUl"></ul>

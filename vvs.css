@@ -1,8 +1,15 @@
 body {
+    font-size: x-large;
+}
+
+.clock {
+    font-size: xx-large;
+}
+
+.stations {
     column-count: 2;
     -webkit-column-count: 2; /* Chrome, Safari, Opera */
     -moz-column-count: 2; /* Firefox */
-    font-size: x-large;
 }
 
 .station {
