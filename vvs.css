@@ -1,0 +1,40 @@
+.station {
+        margin-bottom: 15px;
+}
+
+.stationName {
+    background-color: #FF6600;
+    border-radius: 25px;
+    /* prevent text floating out of the colored area */
+    padding-left: 9px;
+    /* prevent text floating out of the colored area */
+    padding-right: 9px;
+    margin-bottom: 5px;
+}
+
+.connection {
+    margin-left: 18px;
+}
+
+.time-span {
+    width: 90px;
+    display: inline-block;
+}
+
+.delay {
+
+}
+
+.delayGreen {
+    color: #006400;
+}
+
+.delayOrange {
+    color: #FFA500;
+    font-weight: bold;
+}
+
+.delayRed {
+    color: #DC143C;
+    font-weight: bold;
+}
