@@ -36,8 +36,8 @@
         }
 
         function updateClock() {
-            setTimeout(function() {updateClock();}, 1 * 1000);
             document.getElementById('clock').innerText = new Date().toLocaleTimeString();
+            setTimeout(function() {updateClock();}, 1 * 1000);
         }
 
         function updateStation(stationId, directions, ignoreDirections) {
