@@ -29,7 +29,7 @@
               connectionsDiv.id = "connections" + stations[index][0];
               connectionsDiv.classList.add('connections');
               stationDiv.appendChild(connectionsDiv);
-              document.body.appendChild(stationDiv);
+              document.getElementById('stations').appendChild(stationDiv);
               updateStation(stations[index][0], stations[index][1], stations[index][2]);
             }
         }
@@ -147,6 +147,7 @@
     </script>
 </head>
 <body onload="init()">
+<div id="stations"></div>
 <div>
     <div id="debugging"></div>
     <ul id="debuggingUl"></ul>

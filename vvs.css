@@ -1,5 +1,10 @@
+body {
+    column-count: 2;
+}
+
 .station {
         margin-bottom: 15px;
+        break-inside: avoid;
 }
 
 .stationName {
