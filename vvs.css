@@ -2,6 +2,7 @@ body {
     column-count: 2;
     -webkit-column-count: 2; /* Chrome, Safari, Opera */
     -moz-column-count: 2; /* Firefox */
+    font-size: x-large;
 }
 
 .station {
@@ -17,6 +18,7 @@ body {
     /* prevent text floating out of the colored area */
     padding-right: 9px;
     margin-bottom: 5px;
+    font-weight: bold;
 }
 
 .connection {
@@ -24,7 +26,7 @@ body {
 }
 
 .time-span {
-    width: 90px;
+    width: 120px;
     display: inline-block;
 }
 
