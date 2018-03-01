@@ -53,7 +53,7 @@
             setTimeout(function() {
                 time = time - 1000;
                 if (0 <= time) {
-                    document.getElementById('update').innerText = "Nächstes Update in " + time / 1000 + " Sekunden.";
+                    document.getElementById('update').innerText = "Reguläres Update in " + time / 1000 + " s";
                     updateTimeToUpdate(time);
                 }
             }, 1000);
