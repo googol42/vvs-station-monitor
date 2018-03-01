@@ -30,8 +30,10 @@ html, body {
 }
 
 .station {
-        margin-bottom: 15px;
-        break-inside: avoid;
+    margin-bottom: 15px;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
 }
 
 .stationName {
