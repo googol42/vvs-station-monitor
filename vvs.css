@@ -1,5 +1,13 @@
-body {
+html, body {
+    height: 100%;
     font-size: x-large;
+}
+
+.copyright {
+  position: absolute;
+  z-index: -1;
+  bottom: 0px;
+  font-size: xx-small;
 }
 
 .clock {
