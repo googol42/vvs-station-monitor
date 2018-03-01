@@ -30,7 +30,7 @@
               connectionsDiv.classList.add('connections');
               stationDiv.appendChild(connectionsDiv);
               document.getElementById('stations').appendChild(stationDiv);
-              updateStation(stations[index][0], stations[index][1], stations[index][2]);
+              updateStationTimeout(stations[index][0], stations[index][1], stations[index][2]);
             }
             updateClock();
         }
@@ -50,10 +50,14 @@
             }, 1000);
         }
 
-        function updateStation(stationId, directions, ignoreDirections) {
+        function updateStationTimeout(stationId, directions, ignoreDirections) {
             var time = 30 * 1000;
-            setTimeout(function() {updateStation(stationId, directions, ignoreDirections);}, time);
+            setTimeout(function() {updateStationTimeout(stationId, directions, ignoreDirections);}, time);
             updateTimeToUpdate(time);
+            updateStation(stationId, directions, ignoreDirections)
+        }
+
+        function updateStation(stationId, directions, ignoreDirections) {
             var vvsRequest = new XMLHttpRequest();
             vvsRequest.open("GET", "https://efa-api.asw.io/api/v1/station/" + stationId + "/departures/", true);
             vvsRequest.setRequestHeader("Content-type","application/json");
