@@ -71,7 +71,7 @@ html, body {
     right: 0;
     position: fixed;
     overflow-y: hidden;
-    transition: 10s;
+    transition: background 10s;
 }
 
 .fade-in {
