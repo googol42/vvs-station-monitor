@@ -9,14 +9,14 @@
         /* Kaltental 5006009 */
         /* Im Elsental 5002578 */
         /* Österfeld */
-        function init() {
-            var stations = [
-                        ['5000008', ['Vaihingen', 'Vaihingen Bf'], ['']],
-                        ['5006009', ['Mineralbäder', 'Fellbach', 'Fellbach Lutherkirche', 'Heslach Vogelrain'], ['Heslach', 'Vaihingen', 'Vaihingen Bf', '- Betriebsfahrt -']],
-                        ['5002578', ['Rohr Mitte', 'Leinfelden'], ['']],
-                        ['5006027', [''], ['']]
-            ];
+        var stations = [
+                    ['5000008', ['Vaihingen', 'Vaihingen Bf'], ['']],
+                    ['5006009', ['Mineralbäder', 'Fellbach', 'Fellbach Lutherkirche', 'Heslach Vogelrain'], ['Heslach', 'Vaihingen', 'Vaihingen Bf', '- Betriebsfahrt -']],
+                    ['5002578', ['Rohr Mitte', 'Leinfelden'], ['']],
+                    ['5006027', [''], ['']]
+        ];
 
+        function init() {
             for (var index = 0; index < stations.length; index++) {
               var stationDiv = document.createElement('div');
               stationDiv.id = stations[index][0];
