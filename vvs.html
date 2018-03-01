@@ -40,8 +40,20 @@
             setTimeout(function() {updateClock();}, 1 * 1000);
         }
 
+        function updateTimeToUpdate(time) {
+            setTimeout(function() {
+                time = time - 1000;
+                if (0 <= time) {
+                    document.getElementById('update').innerText = "Nächstes Update in " + time / 1000 + " Sekunden.";
+                    updateTimeToUpdate(time);
+                }
+            }, 1000);
+        }
+
         function updateStation(stationId, directions, ignoreDirections) {
-            setTimeout(function() {updateStation(stationId, directions, ignoreDirections);}, 30 * 1000);
+            var time = 30 * 1000;
+            setTimeout(function() {updateStation(stationId, directions, ignoreDirections);}, time);
+            updateTimeToUpdate(time);
             var vvsRequest = new XMLHttpRequest();
             vvsRequest.open("GET", "https://efa-api.asw.io/api/v1/station/" + stationId + "/departures/", true);
             vvsRequest.setRequestHeader("Content-type","application/json");
@@ -153,7 +165,10 @@
     </script>
 </head>
 <body onload="init()">
-<div id="clock" class="clock"></div>
+<div>
+    <div id="update" class="update"></div>
+    <div id="clock" class="clock"></div>
+</div>
 <div id="stations" class="stations"></div>
 <div>
     <div id="debugging"></div>
