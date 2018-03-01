@@ -5,7 +5,6 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <link rel="stylesheet" type="text/css" href="vvs.css">
     <link rel="stylesheet" type="text/css" href="fade.css">
-    <script src="fade.js"></script>
     <script>
         /* Engelboldstraße 5000008 */
         /* Kaltental 5006009 */
@@ -19,7 +18,15 @@
         ];
 
         function init() {
-            onloadFade();
+            if ('ontouchstart' in document.documentElement) {
+                addTouchListeners();
+            }
+            addAllStations()
+            updateStations(true);
+            updateClock();
+        }
+
+        function addAllStations() {
             for (var index = 0; index < stations.length; index++) {
               var stationDiv = document.createElement('div');
               stationDiv.id = stations[index][0];
@@ -34,9 +41,6 @@
               stationDiv.appendChild(connectionsDiv);
               document.getElementById('stations').appendChild(stationDiv);
             }
-            updateStations(true);
-            updateClock();
-            document.body.addEventListener('touchstart', touchHandler, false);
         }
 
         function touchHandler(event) {
@@ -168,6 +172,28 @@
             arrowP.innerText = " → ";
             directionP.innerText = " " + number_ + ": " + connection['direction'];
             return root;
+        }
+
+        function fadeOut() {
+            document.getElementById('black-div').classList.remove('fade-in');
+            document.getElementById('black-div').classList.add('fade-out');
+            document.getElementById('copyright').style.zIndex = -1;
+        }
+
+        function fadeIn() {
+            document.getElementById('black-div').classList.remove('fade-out');
+            document.getElementById('black-div').classList.add('fade-in');
+            document.getElementById('copyright').style.zIndex = 0;
+        }
+
+        function addTouchListeners() {
+            window.addEventListener('touchstart', touchHandler, false);
+            var delayBeforeFade = 15 * 1000;
+            setTimeout(fadeOut, delayBeforeFade);
+            window.addEventListener('touchstart', function() {
+                fadeIn();
+                setTimeout(fadeOut, delayBeforeFade);
+            });
         }
 
         function arrayContains(needle, arraystack) {
