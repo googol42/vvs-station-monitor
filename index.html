@@ -33,17 +33,15 @@
               connectionsDiv.classList.add('connections');
               stationDiv.appendChild(connectionsDiv);
               document.getElementById('stations').appendChild(stationDiv);
-              updateStationTimeout(stations[index][0], stations[index][1], stations[index][2]);
             }
+            updateStations(true);
             updateClock();
             document.body.addEventListener('touchstart', touchHandler, false);
         }
 
         function touchHandler(event) {
-            for (var index = 0; index < stations.length; index++) {
-                updateStation(stations[index][0], stations[index][1], stations[index][2]);
-            }
             document.getElementById('update').style = "color: green;";
+            updateStations(false);
             setTimeout(function() { document.getElementById('update').style = "color: black;"; }, 2000);
         }
 
@@ -62,11 +60,17 @@
             }, 1000);
         }
 
-        function updateStationTimeout(stationId, directions, ignoreDirections) {
+        function updateStations(withTimeout) {
             var time = 30 * 1000;
-            setTimeout(function() {updateStationTimeout(stationId, directions, ignoreDirections);}, time);
-            updateTimeToUpdate(time);
-            updateStation(stationId, directions, ignoreDirections)
+            if (withTimeout) {
+                setTimeout(function() {updateStations(true);}, time);
+            }
+            for (var index = 0; index < stations.length; index++) {
+                updateStation(stations[index][0], stations[index][1], stations[index][2]);
+            }
+            if (withTimeout) {
+                updateTimeToUpdate(time);
+            }
         }
 
         function updateStation(stationId, directions, ignoreDirections) {
