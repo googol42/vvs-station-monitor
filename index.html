@@ -19,7 +19,7 @@
 
         function init() {
             if ('ontouchstart' in document.documentElement) {
-                addTouchListeners();
+                addTouchListener();
             }
             addAllStations()
             updateStations(true);
@@ -180,7 +180,7 @@
             document.getElementById('copyright').style.zIndex = 0;
         }
 
-        function addTouchListeners() {
+        function addTouchListener() {
             var delayBeforeFade = 15 * 1000;
             setTimeout(fadeOut, delayBeforeFade);
             window.addEventListener('touchstart', function() {
