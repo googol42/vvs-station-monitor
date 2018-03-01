@@ -43,12 +43,6 @@
             }
         }
 
-        function touchHandler(event) {
-            document.getElementById('update').style = "color: green;";
-            updateStations(false);
-            setTimeout(function() { document.getElementById('update').style = "color: black;"; }, 2000);
-        }
-
         function updateClock() {
             document.getElementById('clock').innerText = new Date().toLocaleTimeString();
             setTimeout(function() {updateClock();}, 1 * 1000);
@@ -187,10 +181,10 @@
         }
 
         function addTouchListeners() {
-            window.addEventListener('touchstart', touchHandler, false);
             var delayBeforeFade = 15 * 1000;
             setTimeout(fadeOut, delayBeforeFade);
             window.addEventListener('touchstart', function() {
+                updateStations(false);
                 fadeIn();
                 setTimeout(fadeOut, delayBeforeFade);
             });
