@@ -17,7 +17,7 @@ function fadeIn() {
 }
 
 function initFadeTimeout() {
-    var delayBeforeFade = 10 * 1000;
+    var delayBeforeFade = 15 * 1000;
     setTimeout(fadeOut, delayBeforeFade);
     window.addEventListener('touchstart', function() {
         fadeIn();
