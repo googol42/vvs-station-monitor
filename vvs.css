@@ -55,19 +55,6 @@ html, body {
 }
 
 .delay {
-
-}
-
-.delayGreen {
-    color: #006400;
-}
-
-.delayOrange {
-    color: #E89702;
-    font-weight: bold;
-}
-
-.delayRed {
     color: #DC143C;
     font-weight: bold;
 }

@@ -139,13 +139,9 @@
         function getDelay(connection) {
             var delaySpan = document.createElement("span");
             var delay = connection['delay'];
-            delaySpan.innerText = " +" + delay;
-            if (5 < delay) {
-                delaySpan.classList.add('delayRed');
-            } else if (1 < delay) {
-                delaySpan.classList.add('delayOrange');
-            } else {
-                delaySpan.innerText = '';
+            if (parseInt(delay) != 0) {
+                delaySpan.classList.add('delay');
+                delaySpan.innerText = " +" + delay;
             }
             return delaySpan;
         }
