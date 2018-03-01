@@ -33,6 +33,15 @@
               updateStationTimeout(stations[index][0], stations[index][1], stations[index][2]);
             }
             updateClock();
+            document.body.addEventListener('touchstart', touchHandler, false);
+        }
+
+        function touchHandler(event) {
+            for (var index = 0; index < stations.length; index++) {
+                updateStation(stations[index][0], stations[index][1], stations[index][2]);
+            }
+            document.getElementById('update').style = "color: green;";
+            setTimeout(function() { document.getElementById('update').style = "color: black;"; }, 2000);
         }
 
         function updateClock() {
