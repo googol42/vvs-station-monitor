@@ -61,15 +61,13 @@
         }
 
         function updateStations(withTimeout) {
-            var time = 30 * 1000;
             if (withTimeout) {
+                var time = 30 * 1000;
                 setTimeout(function() {updateStations(true);}, time);
+                updateTimeToUpdate(time);
             }
             for (var index = 0; index < stations.length; index++) {
                 updateStation(stations[index][0], stations[index][1], stations[index][2]);
-            }
-            if (withTimeout) {
-                updateTimeToUpdate(time);
             }
         }
 
