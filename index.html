@@ -60,7 +60,7 @@
 
         function updateStations(withTimeout) {
             if (withTimeout) {
-                var time = 30 * 1000;
+                var time = 60 * 1000;
                 setTimeout(function() {updateStations(true);}, time);
                 updateTimeToUpdate(time);
             }
