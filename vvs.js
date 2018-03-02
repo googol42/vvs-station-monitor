@@ -13,14 +13,14 @@
  * are ignored.
 */
 var stations = [
-            // Engelboldstraße
-            ['5000008', ['Vaihingen', 'Vaihingen Bf'], ['']],
-            // Kaltental
-            ['5006009', ['Mineralbäder', 'Fellbach', 'Fellbach Lutherkirche', 'Heslach Vogelrain', 'Heslach'], ['Vaihingen', 'Vaihingen Bf', '- Betriebsfahrt -']],
-            // Im Elsental
-            ['5002578', ['Rohr Mitte', 'Leinfelden'], ['']],
-            // Österfeld
-            ['5006027', [''], ['']]
+    // Engelboldstraße
+    ['5000008', ['Vaihingen', 'Vaihingen Bf'], ['']],
+    // Kaltental
+    ['5006009', ['Mineralbäder', 'Fellbach', 'Fellbach Lutherkirche', 'Heslach Vogelrain', 'Heslach'], ['Vaihingen', 'Vaihingen Bf', '- Betriebsfahrt -']],
+    // Im Elsental
+    ['5002578', ['Rohr Mitte', 'Leinfelden'], ['']],
+    // Österfeld
+    ['5006027', [''], ['']]
 ];
 
 /*
