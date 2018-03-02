@@ -181,11 +181,12 @@
 
         function addTouchListener() {
             var delayBeforeFade = 30 * 1000;
-            setTimeout(fadeOut, delayBeforeFade);
+            var timeout = setTimeout(fadeOut, delayBeforeFade);
             window.addEventListener('touchstart', function() {
+                clearTimeout(timeout);
                 updateStations(false);
                 fadeIn();
-                setTimeout(fadeOut, delayBeforeFade);
+                timeout = setTimeout(fadeOut, delayBeforeFade);
             });
         }
 
