@@ -67,6 +67,10 @@
             for (var index = 0; index < stations.length; index++) {
                 updateStation(stations[index][0], stations[index][1], stations[index][2]);
             }
+            document.getElementById('next-update-icon').classList.add('spin');
+            setTimeout(function() {
+                document.getElementById('next-update-icon').classList.remove('spin');
+            }, 1000);
         }
 
         function updateStation(stationId, directions, ignoreDirections) {
@@ -201,7 +205,7 @@
 <body onload="init()">
 <div id="black-div" class="fade-in"></div>
 <div>
-    <div id="next-update" class="next-update"></div>
+    <img class="next-update icon" id="next-update-icon" src="https://www.publicdomainpictures.net/pictures/50000/velka/hourglass-silhouette.jpg"></img><div id="next-update" class="next-update"></div>
     <div id="clock" class="clock"></div>
 </div>
 <div id="stations" class="stations"></div>

@@ -19,8 +19,19 @@ html, body {
 
 .next-update {
     font-size: xx-large;
-    width: 50%;
+    width: 40%;
     float: left;
+}
+
+.next-update.icon {
+    width: 20px;
+    padding-top: 4px;
+    margin-right: 7px;
+}
+
+.next-update.icon.spin {
+    transform: rotate(720deg);
+    transition: transform 1s linear;
 }
 
 .stations {
