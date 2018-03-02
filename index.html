@@ -181,14 +181,12 @@
         }
 
         function fadeOut() {
-            document.getElementById('black-div').classList.remove('fade-in');
             document.getElementById('black-div').classList.add('fade-out');
             document.getElementById('copyright').style.zIndex = -1;
         }
 
         function fadeIn() {
             document.getElementById('black-div').classList.remove('fade-out');
-            document.getElementById('black-div').classList.add('fade-in');
             document.getElementById('copyright').style.zIndex = 0;
         }
 
@@ -212,7 +210,7 @@
     </script>
 </head>
 <body onload="init()">
-<div id="black-div" class="fade-in"></div>
+<div id="black-div"></div>
 <div>
     <img class="next-update icon" id="next-update-icon" src="https://www.publicdomainpictures.net/pictures/50000/velka/hourglass-silhouette.jpg"></img><div id="next-update" class="next-update"></div>
     <div id="clock" class="clock"></div>
