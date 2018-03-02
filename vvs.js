@@ -1,11 +1,25 @@
-/* Engelboldstraße 5000008 */
-/* Kaltental 5006009 */
-/* Im Elsental 5002578 */
-/* Österfeld */
+/* Each entry contains an array. The array must be structured like this:
+ *   [id, destination array, ignore array]
+ *
+ * The 'id' is the station's id you want to appear on the monitor.
+ *
+ * The 'destination array' is an array with the direction names. Note that
+ * each lines can have multiple destination (e. g. at nights). The monitor
+ * will log errors for all destination which are not included in the array.
+ * This is done to allow noticing configuration errors.
+ *
+ * If you are sure that you don't want to include a destination included
+ * the name in the 'ignore array'. Note that [''] means that all stations
+ * are ignored.
+*/
 var stations = [
+            // Engelboldstraße
             ['5000008', ['Vaihingen', 'Vaihingen Bf'], ['']],
+            // Kaltental
             ['5006009', ['Mineralbäder', 'Fellbach', 'Fellbach Lutherkirche', 'Heslach Vogelrain', 'Heslach'], ['Vaihingen', 'Vaihingen Bf', '- Betriebsfahrt -']],
+            // Im Elsental
             ['5002578', ['Rohr Mitte', 'Leinfelden'], ['']],
+            // Österfeld
             ['5006027', [''], ['']]
 ];
 
