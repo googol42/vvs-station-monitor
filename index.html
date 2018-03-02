@@ -52,7 +52,7 @@
             setTimeout(function() {
                 time = time - 1000;
                 if (0 <= time) {
-                    document.getElementById('update').innerText = "Reguläres Update in " + time / 1000 + " s";
+                    document.getElementById('next-update').innerText = "Reguläres Update in " + time / 1000 + " s";
                     updateTimeToUpdate(time);
                 }
             }, 1000);
@@ -201,7 +201,7 @@
 <body onload="init()">
 <div id="black-div" class="fade-in"></div>
 <div>
-    <div id="update" class="update"></div>
+    <div id="next-update" class="next-update"></div>
     <div id="clock" class="clock"></div>
 </div>
 <div id="stations" class="stations"></div>
