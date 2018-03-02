@@ -23,6 +23,11 @@ var stations = [
             ['5006027', [''], ['']]
 ];
 
+/*
+ * Miliseconds to wait before the screen start to fade.
+ */
+var delayBeforeFade = 30 * 1000;
+
 function init() {
     if ('ontouchstart' in document.documentElement) {
         addTouchListener();
@@ -197,7 +202,6 @@ function fadeIn() {
 }
 
 function addTouchListener() {
-    var delayBeforeFade = 30 * 1000;
     var timeout = setTimeout(fadeOut, delayBeforeFade);
     window.addEventListener('touchstart', function() {
         clearTimeout(timeout);
