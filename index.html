@@ -52,10 +52,18 @@
             setTimeout(function() {
                 time = time - 1000;
                 if (0 <= time) {
-                    document.getElementById('next-update').innerText = "Reguläres Update in " + time / 1000 + " s";
+                    setUpdateTimeToUpdateText(time);
                     updateTimeToUpdate(time);
                 }
             }, 1000);
+        }
+
+        function setUpdateTimeToUpdateText(time) {
+                var text = 'Aktualisiere...';
+                if (!document.getElementById('next-update-icon').classList.contains('spin')) {
+                    text = "Aktualisierung in " + time / 1000 + " s";
+                }
+                document.getElementById('next-update').innerText = text;
         }
 
         function updateStations(withTimeout) {
@@ -68,6 +76,7 @@
                 updateStation(stations[index][0], stations[index][1], stations[index][2]);
             }
             document.getElementById('next-update-icon').classList.add('spin');
+            setUpdateTimeToUpdateText(0);
             setTimeout(function() {
                 document.getElementById('next-update-icon').classList.remove('spin');
             }, 1000);
