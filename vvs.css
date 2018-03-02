@@ -3,14 +3,14 @@ html, body {
     font-size: x-large;
 }
 
-.copyright {
+#copyright {
   position: absolute;
   z-index: -1;
   bottom: 0px;
   font-size: xx-small;
 }
 
-.clock {
+#clock {
     font-size: xx-large;
     text-align: right;
 }
@@ -31,7 +31,7 @@ html, body {
     transition: transform 1s linear;
 }
 
-.stations {
+#stations {
     column-count: 2;
     -webkit-column-count: 2; /* Chrome, Safari, Opera */
     -moz-column-count: 2; /* Firefox */
