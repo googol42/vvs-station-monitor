@@ -28,10 +28,22 @@ var stations = [
  */
 var delayBeforeFade = 30 * 1000;
 
+var directionsService;
+function initMap() {
+    directionsService = new google.maps.DirectionsService;
+    updateTraffic();
+}
+
 function init() {
+    var url = new URL(window.location.href);
+    var key = url.searchParams.get("key");
+    var s = document.createElement('script');
+    s.src = "https://maps.googleapis.com/maps/api/js?key=" + key + "&callback=initMap";
+    document.head.appendChild(s);
     if ('ontouchstart' in document.documentElement) {
         addTouchListener();
     }
+
     addAllStations()
     updateStations(true);
     updateClock();
@@ -91,6 +103,30 @@ function updateStations(withTimeout) {
     setTimeout(function() {
         document.getElementById('next-update-icon').classList.remove('spin');
     }, 1000);
+    updateTraffic();
+}
+
+function updateTraffic() {
+    if (typeof directionsService == 'undefined') {
+        return;
+    }
+    directionsService.route({
+            origin: '70569 Kaltental',
+            destination: 'Leonberg',
+            durationInTraffic: true,
+            waypoints: [{
+                location: 'E52, 71229 Leonberg',
+                stopover: false
+            }],
+            travelMode: 'DRIVING'
+    }, function(response, status) {
+        if (status === 'OK') {
+            var traffic = document.getElementById('traffic');
+            var firstRoute = response['routes']['0']['legs']['0'];
+            traffic.innerText = firstRoute['start_address'] + " → " + firstRoute['end_address'] + ": "
+                + firstRoute['distance']['text'] + " in " + firstRoute['duration']['text'];
+        }
+    });
 }
 
 function updateStation(stationId, directions, ignoreDirections) {
@@ -112,8 +148,11 @@ function addConnections(stationId, directions, ignoreDirections, connections) {
         connectionsDiv.removeChild(connectionsDiv.firstChild);
     }
     var numberOfStationsAdded = 0;
-    for (var i = 0; i < 10000; i++) {
+    for (var i = 0; i < connections.length; i++) {
         var connection = JSON.parse(connections)[i];
+        if (typeof connection == 'undefined') {
+            break;
+        }
         stationDiv.innerText = connection['stopName'];
         if (!arrayContains(connection['direction'], directions) ) {
             if (!arrayContains(connection['direction'], ignoreDirections)) {
