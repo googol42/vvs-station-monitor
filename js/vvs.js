@@ -235,12 +235,10 @@ function addDirection(connection) {
 
 function fadeOut() {
     document.getElementById('black-div').classList.add('fade-out');
-    document.getElementById('copyright').style.zIndex = -1;
 }
 
 function fadeIn() {
     document.getElementById('black-div').classList.remove('fade-out');
-    document.getElementById('copyright').style.zIndex = 0;
 }
 
 function addTouchListener() {
