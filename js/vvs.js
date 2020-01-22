@@ -56,14 +56,15 @@ var delayBeforeFade = 10;
  */
 var updateAll = 60;
 
-var updateTimeout = null;
+var timeoutToUpdateDisplayedTime = null;
+var timeoutToUpdateStations = null;
 
 function init() {
     if ('ontouchstart' in document.documentElement) {
         addTouchListener();
     }
     addAllStations()
-    updateStations(true);
+    updateStations();
     updateClock();
 }
 
@@ -96,13 +97,13 @@ function updateClock() {
     setTimeout(function() {updateClock();}, 1 * 1000);
 }
 
-function updateTimeToUpdate(time) {
-    clearTimeout(updateTimeout);
-    updateTimeout = setTimeout(function() {
+function updateDisplayedTimeUntilNextUpdate(time) {
+    clearTimeout(timeoutToUpdateDisplayedTime);
+    timeoutToUpdateDisplayedTime = setTimeout(function() {
         time = time - 1000;
         if (0 <= time) {
             setUpdateTimeToUpdateText(time);
-            updateTimeToUpdate(time);
+            updateDisplayedTimeUntilNextUpdate(time);
         }
     }, 1000);
 }
@@ -118,12 +119,11 @@ function setUpdateTimeToUpdateText(time) {
         document.getElementById('next-update').innerText = text;
 }
 
-function updateStations(withTimeout) {
-    if (withTimeout) {
-        var time = updateAll * 1000;
-        setTimeout(function() {updateStations(true);}, time);
-        updateTimeToUpdate(time);
-    }
+function updateStations() {
+    var time = updateAll * 1000;
+    clearTimeout(timeoutToUpdateStations);
+    timeoutToUpdateStations = setTimeout(function() {updateStations();}, time);
+    updateDisplayedTimeUntilNextUpdate(time);
     for (var index = 0; index < stations.length; index++) {
         updateStation(stations[index][0], stations[index][1], stations[index][2]);
     }
@@ -245,7 +245,7 @@ function addTouchListener() {
     var timeout = setTimeout(fadeOut, delayBeforeFade * 1000);
     window.addEventListener('touchstart', function() {
         clearTimeout(timeout);
-        updateStations(false);
+        updateStations();
         fadeIn();
         timeout = setTimeout(fadeOut, delayBeforeFade * 1000);
     });
