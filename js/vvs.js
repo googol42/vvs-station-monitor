@@ -56,6 +56,8 @@ var delayBeforeFade = 10;
  */
 var updateAll = 60;
 
+var updateTimeout = null;
+
 function init() {
     if ('ontouchstart' in document.documentElement) {
         addTouchListener();
@@ -95,7 +97,8 @@ function updateClock() {
 }
 
 function updateTimeToUpdate(time) {
-    setTimeout(function() {
+    clearTimeout(updateTimeout);
+    updateTimeout = setTimeout(function() {
         time = time - 1000;
         if (0 <= time) {
             setUpdateTimeToUpdateText(time);
