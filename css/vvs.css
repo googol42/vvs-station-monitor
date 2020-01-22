@@ -1,50 +1,4 @@
-html, body {
-    height: 100%;
-    font-size: x-large;
-}
-
-#copyright {
-  position: absolute;
-  z-index: -1;
-  bottom: 0px;
-  font-size: xx-small;
-}
-
-#clock {
-    font-size: xx-large;
-    text-align: right;
-}
-
-.next-update {
-    font-size: xx-large;
-    float: left;
-}
-
-.next-update.icon {
-    width: 20px;
-    padding-top: 4px;
-    margin-right: 7px;
-}
-
-.next-update.icon.spin {
-    transform: rotate(720deg);
-    transition: transform 1s linear;
-}
-
-#stations {
-    column-count: 2;
-    -webkit-column-count: 2; /* Chrome, Safari, Opera */
-    -moz-column-count: 2; /* Firefox */
-}
-
-.station {
-    margin-bottom: 15px;
-    -webkit-column-break-inside: avoid;
-    page-break-inside: avoid;
-    break-inside: avoid;
-}
-
-.stationName {
+.stationNameRemove {
     background-color: #FF6600;
     border-radius: 25px;
     /* prevent text floating out of the colored area */
@@ -55,18 +9,9 @@ html, body {
     font-weight: bold;
 }
 
-.connection {
-    margin-left: 18px;
-}
-
 .time-span {
     width: 130px;
     display: inline-block;
-}
-
-.delay {
-    color: #DC143C;
-    font-weight: bold;
 }
 
 .fade-out {
@@ -79,6 +24,7 @@ html, body {
     right: 0;
     position: fixed;
     overflow-y: hidden;
+    z-index: 1031;
     transition: background 10s;
 }
 
