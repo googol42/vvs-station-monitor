@@ -1,14 +1,3 @@
-.stationNameRemove {
-    background-color: #FF6600;
-    border-radius: 25px;
-    /* prevent text floating out of the colored area */
-    padding-left: 9px;
-    /* prevent text floating out of the colored area */
-    padding-right: 9px;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
 .time-span {
     width: 130px;
     display: inline-block;
