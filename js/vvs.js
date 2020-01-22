@@ -229,7 +229,6 @@ function addDirection(connection) {
         image.src = 'https://www.ssb-ag.de/typo3conf/ext/mq_efa_ssb/Resources/Public/Icons/sbahn.svg';
     } else if (number_.startsWith('U')) {
         image.src = 'https://www.ssb-ag.de/typo3conf/ext/mq_efa_ssb/Resources/Public/Icons/ubahn.svg';
-    // is R ever returned?
     } else if (number_.startsWith('R')) {
         image.src = 'https://www.ssb-ag.de/typo3conf/ext/mq_efa_ssb/Resources/Public/Icons/rbahn.svg';
     } else {
