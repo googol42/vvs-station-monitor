@@ -171,8 +171,15 @@ function addConnections(stationId, directions, ignoreDirections, connections) {
         timeSpan.classList.add('time-span');
         timeSpan.classList.add('pl-2');
         connectionDiv.appendChild(timeSpan);
-        timeSpan.appendChild(getTime(connection));
-        timeSpan.appendChild(getDelay(connection));
+        var delay = getDelay(connection);
+        if (delay) {
+            var time = getTime(connection);
+            time.classList.add('text-danger');
+            timeSpan.appendChild(time);
+            timeSpan.appendChild(delay);
+        } else {
+            timeSpan.appendChild(getTime(connection));
+        }
         connectionDiv.appendChild(addDirection(connection));
         connectionsDiv.appendChild(connectionDiv);
         numberOfStationsAdded++;
@@ -197,13 +204,14 @@ function getTime(connection) {
 }
 
 function getDelay(connection) {
-    var delaySpan = document.createElement("span");
     var delay = connection['delay'];
-    if (parseInt(delay) != 0) {
-        delaySpan.classList.add('text-danger');
-        delaySpan.classList.add('font-weight-bold');
-        delaySpan.innerText = " +" + delay;
+    if (parseInt(delay) === 0) {
+        return;
     }
+    var delaySpan = document.createElement("span");
+    delaySpan.classList.add('text-danger');
+    delaySpan.classList.add('font-weight-bold');
+    delaySpan.innerText = " (+" + delay + ")";
     return delaySpan;
 }
 
