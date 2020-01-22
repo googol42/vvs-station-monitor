@@ -49,7 +49,7 @@ var stations = [
 /*
  * Seconds to wait before the screen start to fade.
  */
-var delayBeforeFade = 10;
+var delayBeforeFade = 30;
 
 /*
  * Updates all stations/connnections all x seconds
